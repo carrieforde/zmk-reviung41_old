@@ -9,7 +9,21 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
 
+#define AS(keycode) &as LS(keycode) keycode
+
 / {
+        behaviors {
+            as: auto_shift {
+                compatible = "zmk,behavior-hold-tap";
+                label = "AUTO_SHIFT";
+                #binding-cells = <2>;
+                tapping_term_ms = <150>;
+                quick_tap_ms = <0>;
+                flavor = "tap-preferred";
+                bindings = <&kp>, <&kp>;
+            };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -20,9 +34,9 @@
 // | (SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  |   SHFT)   |
 //                         | ALT | LWR | SPC | RSE  | ALT |
                         bindings = <
-   &kp TAB        &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp KP_MINUS
-   &kp LCTRL      &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &mt LSHFT LPAR &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RSHFT RPAR
+   &kp TAB        AS(Q) AS(W) AS(E) AS(R) AS(T)   AS(Y) AS(U)  AS(I)     AS(O)   AS(P)    AS(KP_MINUS)
+   &kp LCTRL      AS(A) AS(S) AS(D) AS(F) AS(G)   AS(H) AS(J)  AS(K)     AS(L)   AS(SEMI) AS(SQT)
+   &mt LSHFT LPAR AS(Z) AS(X) AS(C) AS(V) AS(B)   AS(N) AS(M)  AS(COMMA) AS(DOT) AS(FSLH) &mt RSHFT RPAR
                                &kp LCMD  &mo 1 &kp SPACE &mo 2  &kp RALT
                         >;
                 };
@@ -57,13 +71,13 @@
 
                 adjust_layer {
 // -----------------------------------------------------------------------------------------
-// |  |          |        |          | RESET |  |       | RGB TOG  |          |          |          |  |  |
-// |  | K_PREV   | K_PP   | K_NEXT   |       |  |       | RGB ANI+ | RGB SAT+ | RGB HUE+ | RGB BRI+ |  |  |
-// |  | K_VOL_DN | K_MUTE | K_VOL_UP |       |  |       | RGB ANI- | RGB SAT- | RGB HUE- | RGB BRI+ |  |  |
-//                                        |  |  |       |  |  |
+// | BTCLR| BT0      | BT1    | BT2      | BT3   | BT4 |       | RGB TOG  |          |          |          |  |  |
+// |      | K_PREV   | K_PP   | K_NEXT   |       |     |       | RGB ANI+ | RGB SAT+ | RGB HUE+ | RGB BRI+ |  |  |
+// |      | K_VOL_DN | K_MUTE | K_VOL_UP |       |     |       | RGB ANI- | RGB SAT- | RGB HUE- | RGB BRI+ |  |  |
+//                                       |       |     |       |          |          |
 
                         bindings = <
-    &none  &none         &none       &none         &none  &none      &rgb_ug RGB_TOG            &none            &none            &none            &none  &none
+    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4      &rgb_ug RGB_TOG            &none            &none            &none            &none  &none
     &none  &kp K_PREV    &kp K_PP    &kp K_NEXT    &none  &none      &rgb_ug RGB_EFF  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &none  &none
     &none  &kp K_VOL_DN  &kp K_MUTE  &kp K_VOL_UP  &none  &none      &rgb_ug RGB_EFR  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &none  &none
                                       &trans      &trans       &tog 3        &trans      &trans

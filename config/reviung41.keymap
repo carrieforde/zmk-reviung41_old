@@ -34,7 +34,7 @@
 // | (SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  |   SHFT)   |
 //                         | ALT | LWR | SPC | RSE  | ALT |
                         bindings = <
-   &kp TAB        AS(Q) AS(W) AS(E) AS(R) AS(T)   AS(Y) AS(U)  AS(I)     AS(O)   AS(P)    AS(KP_MINUS)
+   &kp TAB        AS(Q) AS(W) AS(E) AS(R) AS(T)   AS(Y) AS(U)  AS(I)     AS(O)   AS(P)    AS(MINUS)
    &kp LCTRL      AS(A) AS(S) AS(D) AS(F) AS(G)   AS(H) AS(J)  AS(K)     AS(L)   AS(SEMI) AS(SQT)
    &mt LSHFT LPAR AS(Z) AS(X) AS(C) AS(V) AS(B)   AS(N) AS(M)  AS(COMMA) AS(DOT) AS(FSLH) &mt RSHFT RPAR
                                &kp LCMD  &mo 1 &kp SPACE &mo 2  &kp RALT
